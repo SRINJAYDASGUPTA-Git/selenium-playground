@@ -86,7 +86,32 @@ public class LoginPageTest extends BaseTest {
 
     @Test
     void rememberMeShouldBeSelected(){
+        openPage("pages/login.html");
+        WebElement rememberMeBtn = driver.findElement(By.id("rememberMe"));
 
+        rememberMeBtn.click();
+
+        assertTrue(
+                rememberMeBtn.isSelected()
+        );
+    }
+
+    @Test
+    void showPasswordBtnShouldShowPassword(){
+        openPage("pages/login.html");
+
+        WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("admin");
+
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("password123");
+
+        driver.findElement(By.id("showPassword")).click();
+
+        assertEquals(
+                "password123",
+                password.getAttribute("value")
+        );
     }
 
     @Test
